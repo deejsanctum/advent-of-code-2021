@@ -1,6 +1,8 @@
 package advent.of.code.day2
 
 import advent.of.code.shared.DaySolution
+import advent.of.code.shared.getFilePath
+import java.io.File
 
 class Day2(private val input: List<SubmarinePath>) : DaySolution {
     override var day = 2
@@ -38,4 +40,8 @@ class Day2(private val input: List<SubmarinePath>) : DaySolution {
         return hp * depth
     }
 
+}
+
+fun main() {
+    Day2(File(getFilePath("input2.txt")).readLines().map { SubmarinePath.from(it) }).printSolutions()
 }
