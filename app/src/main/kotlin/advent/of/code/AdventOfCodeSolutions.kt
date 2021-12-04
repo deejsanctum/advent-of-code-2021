@@ -4,6 +4,7 @@ import advent.of.code.day1.Day1
 import advent.of.code.day2.Day2
 import advent.of.code.day2.SubmarinePath
 import advent.of.code.day3.Day3
+import advent.of.code.day4.Day4
 import advent.of.code.shared.getFilePath
 import java.io.File
 
