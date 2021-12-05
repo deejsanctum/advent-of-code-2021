@@ -10,4 +10,11 @@ interface DaySolution {
         println("Part 1: ${getPart1Solution()}")
         println("Part 2: ${getPart2Solution()}")
     }
+
+    fun printSolutionsAndTime() {
+        val startTime = System.currentTimeMillis()
+        printSolutions()
+        val endTime = System.currentTimeMillis()
+        println("==> Execution time: ${endTime - startTime}")
+    }
 }
