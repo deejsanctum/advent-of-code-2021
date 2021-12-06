@@ -4,13 +4,14 @@ import advent.of.code.shared.DaySolution
 import advent.of.code.shared.getFilePath
 import java.io.File
 
-class Day2(private val input: List<SubmarinePath>) : DaySolution {
+class Day2(input: List<String>) : DaySolution {
     override var day = 2
+    private val submarinePath = input.map { SubmarinePath.from(it) }
     override fun getPart1Solution(): Any {
         var hp = 0
         var depth = 0
 
-        input.forEach {
+        submarinePath.forEach {
             when (it.direction) {
                 "forward" -> hp += it.distance
                 "up" -> depth -= it.distance
@@ -26,7 +27,7 @@ class Day2(private val input: List<SubmarinePath>) : DaySolution {
         var depth = 0
         var aim = 0
 
-        input.forEach {
+        submarinePath.forEach {
             when (it.direction) {
                 "forward" -> {
                     hp += it.distance
@@ -43,5 +44,5 @@ class Day2(private val input: List<SubmarinePath>) : DaySolution {
 }
 
 fun main() {
-    Day2(File(getFilePath("input2.txt")).readLines().map { SubmarinePath.from(it) }).printSolutions()
+    Day2(File(getFilePath("input2.txt")).readLines()).printSolutions()
 }
