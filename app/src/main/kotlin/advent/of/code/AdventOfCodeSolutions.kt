@@ -11,7 +11,7 @@ import advent.of.code.shared.getFilePath
 import java.io.File
 
 fun main() {
-    Day1(File(getFilePath("input1.txt")).readLines().map { it.toInt() }).printSolutionsAndTime()
+    Day1(File(getFilePath("input1.txt")).readLines()).printSolutionsAndTime()
     Day2(File(getFilePath("input2.txt")).readLines()).printSolutionsAndTime()
     Day3(File(getFilePath("input3.txt")).readLines()).printSolutionsAndTime()
     Day4(File(getFilePath("input4.txt")).readLines()).printSolutionsAndTime()
