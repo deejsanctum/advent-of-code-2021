@@ -23,8 +23,7 @@ class SevenSegmentDisplay(input: String) {
         digitConfigs = DigitStructure.values()
             .associate { ds -> ds.ordinal to ds.positions.joinToString("") { letterPositions[it]!! } }
         outputResult = digitOutput.map { digOut ->
-            digitConfigs.entries.find { it.value.length == digOut.length && it.value.all { c -> digOut.contains(c) } }?.key
-                ?: error("")
+            digitConfigs.entries.find { it.value.length == digOut.length && it.value.all { c -> digOut.contains(c) } }!!.key
         }.joinToString("").toInt()
     }
 
@@ -54,8 +53,8 @@ class SevenSegmentDisplay(input: String) {
         return result
     }
 
-    private fun getMappingForDigit1() = uniqueSignalPatterns.find { it.length == 2 } ?: error("")
-    private fun getMappingForDigit4() = uniqueSignalPatterns.find { it.length == 4 } ?: error("")
-    private fun getMappingForDigit7() = uniqueSignalPatterns.find { it.length == 3 } ?: error("")
-    private fun getMappingForDigit8() = uniqueSignalPatterns.find { it.length == 7 } ?: error("")
+    private fun getMappingForDigit1() = uniqueSignalPatterns.find { it.length == 2 }!!
+    private fun getMappingForDigit4() = uniqueSignalPatterns.find { it.length == 4 }!!
+    private fun getMappingForDigit7() = uniqueSignalPatterns.find { it.length == 3 }!!
+    private fun getMappingForDigit8() = uniqueSignalPatterns.find { it.length == 7 }!!
 }
