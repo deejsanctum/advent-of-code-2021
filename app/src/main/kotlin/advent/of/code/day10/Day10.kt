@@ -8,7 +8,7 @@ enum class ChunkType(
     val char: Char,
     val closing: Char? = null,
     val illegalValue: Int? = null,
-    pointValue: Int? = null,
+    val pointValue: Int? = null,
 ) {
     OPEN_BRACKETS('{', '}'),
     OPEN_CURVED_PARENTHESIS('(', ')'),
@@ -25,20 +25,11 @@ fun getChunkTypeFrom(char: Char) = ChunkType.values().find { it.char == char }!!
 class Day10(val input: List<String>) : DaySolution {
     override var day = 10
 
-    override fun getPart1Solution(): Any {
-        val map = input.map { getIllegalCharacterValue(it) }.mapNotNull {
-            when (it) {
-                ')' -> 3
-                ']' -> 57
-                '}' -> 1197
-                '>' -> 25137
-                else -> 0
-            }
-        }.sum()
-        return map
-    }
+    override fun getPart1Solution() = input.map { getIllegalCharacterValue(it) }
+        .mapNotNull { it?.illegalValue ?: 0 }
+        .sum()
 
-    private fun getIllegalCharacterValue(line: String): Char? {
+    private fun getIllegalCharacterValue(line: String): ChunkType? {
         val currentState = mutableListOf<ChunkType>()
         for (c in line) {
             when (val chunkType = getChunkTypeFrom(c)) {
@@ -49,7 +40,7 @@ class Day10(val input: List<String>) : DaySolution {
                 -> currentState.add(chunkType)
                 else -> {
                     if (currentState.last().closing != chunkType.char) {
-                        return chunkType.char
+                        return chunkType
                     } else {
                         currentState.removeLast()
                     }
@@ -73,32 +64,14 @@ class Day10(val input: List<String>) : DaySolution {
                         else -> currentState.removeLast()
                     }
                 }
-                return@map currentState.map { it.closing }.reversed().fold(0L) { acc, c ->
-                    acc * 5 + when (c) {
-                        ')' -> 1
-                        ']' -> 2
-                        '}' -> 3
-                        '>' -> 4
-                        else -> 0
-                    }
-                }
+                return@map currentState.map { getChunkTypeFrom(it.closing ?: error("")) }
+                    .reversed()
+                    .fold(0L) { acc, c -> acc * 5 + c.pointValue!! }
             }.sorted()
         return map[Math.floorDiv(map.size, 2)]
     }
 }
 
 fun main() {
-    Day10(listOf(
-        "[({(<(())[]>[[{[]{<()<>>",
-        "[(()[<>])]({[<{<<[]>>(",
-        "{([(<{}[<>[]}>{[]{[(<()>",
-        "(((({<>}<{<{<>}{[]{[]{}",
-        "[[<[([]))<([[{}[[()]]]",
-        "[{[{({}]{}}([{[{{{}}([]",
-        "{<[[]]>}<{[{[{[]{()[[[]",
-        "[<(<(<(<{}))><([]([]()",
-        "<{([([[(<>()){}]>(<<{{",
-        "<{([{{}}[<[[[<>{}]]]>[]]",
-    )).printSolutions()
     Day10(File(getFilePath("input10.txt")).readLines()).printSolutions()
 }

@@ -40,7 +40,7 @@ class Day9(val input: List<String>) : DaySolution {
     override fun getPart1Solution() = locations.flatten().filter { it.isLowPoint }.sumOf { it.riskLevel }
 
     override fun getPart2Solution(): Any {
-        TODO("Not implemented")
+        return "Not implemented"
     }
 
     private fun calcLocations(): List<List<Location>> {
