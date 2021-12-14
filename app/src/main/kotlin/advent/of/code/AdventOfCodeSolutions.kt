@@ -4,6 +4,7 @@ import advent.of.code.day1.Day1
 import advent.of.code.day10.Day10
 import advent.of.code.day11.Day11
 import advent.of.code.day13.Day13
+import advent.of.code.day14.Day14
 import advent.of.code.day2.Day2
 import advent.of.code.day3.Day3
 import advent.of.code.day4.Day4
@@ -29,5 +30,6 @@ fun main() {
     Day11(File(getFilePath("input11.txt")).readLines()).printSolutionsAndTime()
     // TODO: Day12
     Day13(File(getFilePath("input13.txt")).readLines()).printSolutionsAndTime()
+    Day14(File(getFilePath("input14.txt")).readLines()).printSolutionsAndTime()
 }
 
